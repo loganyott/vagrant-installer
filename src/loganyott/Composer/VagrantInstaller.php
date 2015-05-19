@@ -14,10 +14,17 @@ class VagrantInstaller extends LibraryInstaller {
   public function install(InstalledRepositoryInterface $repo, PackageInterface $package) {
     parent::install($repo, $package);
     $vagrantfile = $this->getInstallPath($package) . '/Vagrantfile';
-    if(file_exists($vagrantfile)) {
-      $cwd = getcwd();
-      $fs = new Filesystem();
-      $fs->ensureDirectoryExists($cwd);
+    if(!file_exists($vagrantfile)) {
+      throw new \RuntimeException("\nCouldn't find package's Vagrantfile.");
+    }
+    if(!($cwd = getcwd())) {
+      throw new \RuntimeException("\nCan't access cwd.");
+    }
+    if(file_exists($cwd . '/Vagrantfile')) {
+      // TODO there's a better way to do this, I just haven't found it yet.
+      echo "\nVagrantfile already exists in project root. Skipping copy...";
+    }
+    else {
       if(!rename($vagrantfile, $cwd . '/Vagrantfile')) {
         throw new \RuntimeException("\nCouldn't write Vagrantfile to project root.");
       }
