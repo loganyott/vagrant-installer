@@ -13,7 +13,7 @@ class VagrantInstaller extends LibraryInstaller {
    */
   public function install(InstalledRepositoryInterface $repo, PackageInterface $package) {
     parent::install($repo, $package);
-    $vagrantfile = $this->getInstalledPath($package) . '/Vagrantfile';
+    $vagrantfile = $this->getInstallPath($package) . '/Vagrantfile';
     if(file_exists($vagrantfile)) {
       $cwd = getcwd();
       Filesystem::ensureDirectoryExists($cwd);
