@@ -1,0 +1,21 @@
+{
+    "name": "loganyott/vagrant-installer",
+    "description": "Installer for Vagrant configurations",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Logan Yott",
+            "email": "loganyott@gmail.com"
+        }
+    ],
+    "autoload": {
+      "psr-0": {"loganyott\\Composer": "src/"}
+    },
+    "extra": {
+      "class": "loganyott\\Composer\\VagrantInstallerPlugin"
+    },
+    "require": {
+        "composer-plugin-api": "^1.0"
+    }
+}
