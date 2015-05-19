@@ -16,7 +16,8 @@ class VagrantInstaller extends LibraryInstaller {
     $vagrantfile = $this->getInstallPath($package) . '/Vagrantfile';
     if(file_exists($vagrantfile)) {
       $cwd = getcwd();
-      Filesystem::ensureDirectoryExists($cwd);
+      $fs = new Filesystem();
+      $fs->ensureDirectoryExists($cwd);
       if(!rename($vagrantfile, $cwd . '/Vagrantfile')) {
         throw new \RuntimeException("\nCouldn't write Vagrantfile to project root.");
       }
