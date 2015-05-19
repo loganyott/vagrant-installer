@@ -22,7 +22,7 @@ class VagrantInstaller extends LibraryInstaller {
     }
     if(file_exists($cwd . '/Vagrantfile')) {
       // TODO there's a better way to do this, I just haven't found it yet.
-      echo "\nVagrantfile already exists in project root. Skipping copy...";
+      echo "Vagrantfile already exists in project root. Skipping copy...\n";
     }
     else {
       if(!rename($vagrantfile, $cwd . '/Vagrantfile')) {
