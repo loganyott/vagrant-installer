@@ -2,9 +2,10 @@
 
 namespace loganyott\Composer;
 
-use Composer\Package\PackageInterface;
-use Composer\Installer\LibraryInstaller;
-use Composer\Util\Filesystem;
+use \Composer\Repository\InstalledRepositoryInterface;
+use \Composer\Package\PackageInterface;
+use \Composer\Installer\LibraryInstaller;
+use \Composer\Util\Filesystem;
 
 class VagrantInstaller extends LibraryInstaller {
   /**
