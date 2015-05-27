@@ -26,7 +26,7 @@ class VagrantInstaller extends LibraryInstaller {
     }
     else {
       $placeholder = file(dirname(dirname(dirname(dirname(__FILE__)))) . '/Vagrantfile');
-      $placeholder[4] = "VAGRANTFILE = " . $vagrantfile . "\n";
+      $placeholder[4] = "VAGRANTFILE = \"" . $vagrantfile . "\"\n";
       if(!file_put_contents($cwd . '/Vagrantfile', $placeholder)) {
         throw new \RuntimeException("\nCouldn't write Vagrantfile to project root.");
       }
