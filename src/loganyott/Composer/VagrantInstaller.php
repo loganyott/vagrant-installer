@@ -20,16 +20,13 @@ class VagrantInstaller extends LibraryInstaller {
     if(!($cwd = getcwd())) {
       throw new \RuntimeException("\nCan't access cwd.");
     }
-    if(file_exists($cwd . '/Vagrantfile')) {
-      // TODO there's a better way to do this, I just haven't found it yet.
-      echo "Vagrantfile already exists in project root. Skipping copy...\n";
-    }
-    else {
-      $placeholder = file(dirname(dirname(dirname(dirname(__FILE__)))) . '/Vagrantfile');
-      $placeholder[4] = "VAGRANTFILE = \"" . $vagrantfile . "\"\n";
-      if(!file_put_contents($cwd . '/Vagrantfile', $placeholder)) {
-        throw new \RuntimeException("\nCouldn't write Vagrantfile to project root.");
-      }
+
+    $vagrantfile = dirname(dirname(dirname(dirname(__FILE__)))) . '/Vagrantfile';
+    $template = file_get_contents( $vagrantfile );
+    $template = str_replace( "# VAGRANTFILE = ", "VAGRANTFILE = $vagrantfile", $template );
+
+    if ( false === file_put_contents( $cwd . "/Vagrantfile", $template ) ) {
+      throw new \RuntimeException( "\nCouldn't write to Vagrantfile in project root." );
     }
   }
 
